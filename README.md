@@ -1,8 +1,12 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="https://expressjs.com/" target="blank"><img src="https://avatars.githubusercontent.com/u/5658226?s=120" width="120" alt="Express Logo" />
+  </a>
+  <a href="https://www.typescriptlang.org/docs/" target="blank"><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" width="120" alt="TypeScript Logo" />
+  </a>
 </p>
 
-## nest-blog
+## nestjs-mysql-blog
 
 <!-- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository. -->
 This is a blog's `api` application created by NestJS
