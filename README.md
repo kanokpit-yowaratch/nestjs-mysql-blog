@@ -2,9 +2,17 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-## Description
+## nest-blog
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<!-- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository. -->
+This is a blog's `api` application created by NestJS
+
+
+
+## Tech Stack
+
+  `NestJS` `Express` `TypeScript`
+
 
 ## Installation
 
@@ -39,7 +47,7 @@ $ npm run test:cov
 ```
 
 ## Configuration file
-**.env** file as follows:
+**`.env`** file as follows:
 <ul>
 <li>DB_TYPE=mysql</li>
 <li>DB_HOST=localhost</li>
