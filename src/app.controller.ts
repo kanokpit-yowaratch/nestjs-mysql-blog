@@ -1,5 +1,7 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res, StreamableFile } from '@nestjs/common';
 import { AppService } from './app.service';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 @Controller()
 export class AppController {
@@ -18,5 +20,11 @@ export class AppController {
   @Get('medias/:file_name')
   display(@Res() res, @Param('file_name') fileName: string) {
     res.sendFile(fileName, { root: './uploads' });
+  }
+
+  @Get('download/:file_name')
+  download(@Param('file_name') fileName: string): StreamableFile {
+    const file = createReadStream(join(process.cwd(), `uploads/${fileName}`));
+    return new StreamableFile(file);
   }
 }
