@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BlogsModule } from './blogs/blogs.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 require('dotenv').config();
 
 const connection = {
@@ -19,8 +21,14 @@ const connection = {
 };
 
 @Module({
-  //@ts-ignore
-  imports: [TypeOrmModule.forRoot(connection), BlogsModule],
+  imports: [
+    //@ts-ignore
+    TypeOrmModule.forRoot(connection),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+    }),
+    BlogsModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
