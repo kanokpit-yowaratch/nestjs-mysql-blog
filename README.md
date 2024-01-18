@@ -53,7 +53,6 @@ $ npm run test:cov
 ## Configuration file
 **`.env`** file as follows:
 <ul>
-<li>DB_TYPE=mysql</li>
 <li>DB_HOST=localhost</li>
 <li>DB_PORT=3306</li>
 <li>DB_USERNAME=</li>

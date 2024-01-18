@@ -17,7 +17,13 @@ export const multerOptions = {
     if (file.mimetype.match(/\/(jpg|jpeg|png|gif|pdf)$/)) {
       cb(null, true);
     } else {
-      cb(new HttpException(`Unsupported file type ${extname(file.originalname)}`, HttpStatus.BAD_REQUEST), false);
+      cb(
+        new HttpException(
+          `Unsupported file type ${extname(file.originalname)}`,
+          HttpStatus.BAD_REQUEST,
+        ),
+        false,
+      );
     }
   },
 
@@ -31,7 +37,10 @@ export const multerOptions = {
 };
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Blog]), MulterModule.register(multerOptions)],
+  imports: [
+    TypeOrmModule.forFeature([Blog]),
+    MulterModule.register(multerOptions),
+  ],
   controllers: [BlogsController],
   providers: [BlogsService],
 })

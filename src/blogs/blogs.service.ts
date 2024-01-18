@@ -10,13 +10,13 @@ export class BlogsService {
   constructor(
     @InjectRepository(Blog)
     private blogsRepository: Repository<Blog>,
-  ) {}
+  ) { }
 
   create(createBlogDto: CreateBlogDto) {
     return this.blogsRepository.save(createBlogDto);
   }
 
-  findAll(): Promise<Blog[]>  {
+  findAll(): Promise<Blog[]> {
     return this.blogsRepository.find();
   }
 
