@@ -15,6 +15,8 @@ export class AppService {
     welcomeMessage += `<li>/blogs/:id (PATCH)</li>`;
     welcomeMessage += `<li>/blogs/:id (DELETE)</li>`;
     welcomeMessage += `<li>/upload (POST)</li>`;
+    welcomeMessage += `<li>/medias/:file_name (GET)</li>`;
+    welcomeMessage += `<li>/download/:file_name (GET)</li>`;
     welcomeMessage += `</ul>`;
     return welcomeMessage;
   }
