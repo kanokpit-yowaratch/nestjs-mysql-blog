@@ -37,6 +37,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## PM2 command
+
+
+```bash
+# build to create dist/main.js
+$ npm run build
+
+# pm2 to start api service
+$ pm2 start dist/main.js --name "nestjs-api"
+```
+
 ## Test
 
 ```bash
@@ -53,9 +64,14 @@ $ npm run test:cov
 ## Configuration file
 **`.env`** file as follows:
 <ul>
+<li>API_PORT=[avoid 5000]</li>
 <li>DB_HOST=localhost</li>
 <li>DB_PORT=3306</li>
 <li>DB_USERNAME=</li>
 <li>DB_PASSWORD=</li>
 <li>DB_DATABASE=</li>
 </ul>
+
+## Demo
+
+[kanokpit.com](https://kanokpit.com)
