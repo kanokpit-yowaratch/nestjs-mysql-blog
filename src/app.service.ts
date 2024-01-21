@@ -7,7 +7,7 @@ export class AppService {
   }
 
   getAmazing(): string {
-    let welcomeMessage = '<h4>All API:</h4>';
+    let welcomeMessage = '<h4>All APIs <a href="/api">here</a>:</h4>';
     welcomeMessage += `<ul>`;
     welcomeMessage += `<li><a href="/hello">/hello</a> (GET)</li>`;
     welcomeMessage += `<li><a href="/blogs">/blogs</a> (GET, POST)</li>`;
