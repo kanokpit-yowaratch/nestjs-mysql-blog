@@ -8,9 +8,6 @@ export class AppController {
   constructor(private readonly appService: AppService) { }
 
   @Get() // default here
-  getAmazingWorld(): string {
-    return this.appService.getAmazing();
-  }
 
   @Get('/hello') // need /hello
   getHello(): string {
