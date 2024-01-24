@@ -13,12 +13,20 @@ import { BlogsService } from './blogs.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Blog')
 @Controller('blogs')
 export class BlogsController {
   constructor(private readonly blogsService: BlogsService) { }
 
   @Post()
+  @ApiResponse({ status: 201, description: 'The blog has been successfully created.'})
+  @ApiResponse({ status: 400, description: 'Bad request.'})
+  @ApiBody({
+    type: CreateBlogDto,
+    description: 'Json structure for blog object',
+ })
   @UseInterceptors(FileInterceptor('file'))
   create(
     @UploadedFile() file: Express.Multer.File,

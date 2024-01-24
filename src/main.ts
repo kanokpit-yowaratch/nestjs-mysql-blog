@@ -18,9 +18,12 @@ async function bootstrap() {
   );
 
   const options = new DocumentBuilder()
-    .setTitle('NestJS Example')
-    .setDescription('This API is just an example case')
+    .setTitle('NestJS Blog')
+    .setDescription(`Blog's api created by NestJS`)
     .setVersion('1.0')
+    .addServer('http://localhost:5432/', 'Local environment')
+    .addServer('https://kanokpit.com/', 'Production')
+    .addTag('Blog')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('/', app, document);
