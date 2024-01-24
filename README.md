@@ -75,3 +75,7 @@ $ npm run test:cov
 ## Demo
 
 [kanokpit.com](https://kanokpit.com)
+
+## Client example
+
+Client blog repo: [nextjs-client-blog](https://github.com/kanokpit-yowaratch/nextjs-client-blog)
