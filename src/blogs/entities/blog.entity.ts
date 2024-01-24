@@ -30,7 +30,7 @@ export class Blog {
   seo_description: string;
 
   @Column()
-  cover_id: number;
+  cover_path: string;
 
   @Column()
   count_view: number;

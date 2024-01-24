@@ -7,7 +7,7 @@ export class CreateBlogDto {
   seo_title: string;
   seo_keywords: string;
   seo_description: string;
-  cover_id: number;
+  cover_path: string;
   count_view: number;
   related: string;
   // created_at: string;
