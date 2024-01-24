@@ -24,8 +24,9 @@ export class BlogsController {
     @UploadedFile() file: Express.Multer.File,
     @Body() createBlogDto: CreateBlogDto,
   ) {
-    // console.log(file);
+    const fileName = file?.filename || null;
     // console.log(createBlogDto);
+    createBlogDto.cover_path = fileName;
     return this.blogsService.create(createBlogDto);
   }
 
