@@ -13,7 +13,7 @@ async function bootstrap() {
         enableImplicitConversion: true,
       },
       forbidNonWhitelisted: true,
-      whitelist: true,
+      // whitelist: true,
     }),
   );
 
