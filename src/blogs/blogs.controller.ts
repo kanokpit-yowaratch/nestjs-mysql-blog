@@ -21,12 +21,12 @@ export class BlogsController {
   constructor(private readonly blogsService: BlogsService) { }
 
   @Post()
-  @ApiResponse({ status: 201, description: 'The blog has been successfully created.'})
-  @ApiResponse({ status: 400, description: 'Bad request.'})
+  @ApiResponse({ status: 201, description: 'The blog has been successfully created.' })
+  @ApiResponse({ status: 400, description: 'Bad request.' })
   @ApiBody({
     type: CreateBlogDto,
     description: 'Json structure for blog object',
- })
+  })
   @UseInterceptors(FileInterceptor('file'))
   create(
     @UploadedFile() file: Express.Multer.File,
@@ -49,7 +49,19 @@ export class BlogsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto) {
+  @ApiResponse({ status: 200, description: 'The blog has been successfully updated.' })
+  @ApiResponse({ status: 400, description: 'Bad request.' })
+  @ApiBody({
+    type: UpdateBlogDto,
+    description: 'Json structure for blog object',
+  })
+  @UseInterceptors(FileInterceptor('file'))
+  update(
+    @UploadedFile() file: Express.Multer.File,
+    @Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto
+  ) {
+    const fileName = file?.filename || null;
+    updateBlogDto.cover_path = fileName;
     return this.blogsService.update(+id, updateBlogDto);
   }
 
