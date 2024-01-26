@@ -29,10 +29,10 @@ export class BlogsController {
   })
   @UseInterceptors(FileInterceptor('file'))
   create(
-    @UploadedFile() file: Express.Multer.File,
     @Body() createBlogDto: CreateBlogDto,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
-    const fileName = file?.filename || null;
+    const fileName = file?.filename || '';
     // console.log(createBlogDto);
     createBlogDto.cover_path = fileName;
     return this.blogsService.create(createBlogDto);
@@ -57,10 +57,10 @@ export class BlogsController {
   })
   @UseInterceptors(FileInterceptor('file'))
   update(
-    @UploadedFile() file: Express.Multer.File,
-    @Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto
+    @Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto,
+    @UploadedFile() file?: Express.Multer.File
   ) {
-    const fileName = file?.filename || null;
+    const fileName = file?.filename || '';
     updateBlogDto.cover_path = fileName;
     return this.blogsService.update(+id, updateBlogDto);
   }
