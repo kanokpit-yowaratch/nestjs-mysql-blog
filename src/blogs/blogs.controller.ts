@@ -60,8 +60,12 @@ export class BlogsController {
     @Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto,
     @UploadedFile() file?: Express.Multer.File
   ) {
-    const fileName = file?.filename || '';
-    updateBlogDto.cover_path = fileName;
+    if (file && file?.filename) {
+      const fileName = file?.filename || '';
+      updateBlogDto.cover_path = fileName;
+    } else {
+      delete updateBlogDto['cover_path'];
+    }
     return this.blogsService.update(+id, updateBlogDto);
   }
 
