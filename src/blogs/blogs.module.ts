@@ -1,7 +1,9 @@
 import { HttpException, HttpStatus, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlogsService } from './blogs.service';
+import { PostService } from './post.service';
 import { BlogsController } from './blogs.controller';
+import { PostController } from './post.controller';
 import { Blog } from './entities/blog.entity';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -41,7 +43,7 @@ export const multerOptions = {
     TypeOrmModule.forFeature([Blog]),
     MulterModule.register(multerOptions),
   ],
-  controllers: [BlogsController],
-  providers: [BlogsService],
+  controllers: [BlogsController, PostController],
+  providers: [BlogsService, PostService],
 })
 export class BlogsModule { }
