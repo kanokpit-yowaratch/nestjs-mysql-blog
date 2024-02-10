@@ -16,8 +16,14 @@ export class BlogsService {
     return this.blogsRepository.save(createBlogDto);
   }
 
-  findAll(): Promise<Blog[]> {
-    return this.blogsRepository.find({ where: { active_status: 1 } });
+  findAll(query: any): Promise<Blog[]> {
+    if (query.active === 'Y') {
+      return this.blogsRepository.find({ where: { active_status: 1 } });
+    } else if (query.active === 'N') {
+      return this.blogsRepository.find({ where: { active_status: 0 } });
+    } else {
+      return this.blogsRepository.find();
+    }
   }
 
   findOne(id: number): Promise<Blog | null> {
@@ -30,5 +36,11 @@ export class BlogsService {
 
   async remove(id: number): Promise<void> {
     await this.blogsRepository.delete(id);
+  }
+
+  async status(id: number): Promise<void> {
+    const post = await this.blogsRepository.findOneBy({ id });
+    const setStatusTo = post.active_status === 1 ? 0 : 1;
+    await this.blogsRepository.update(id, { active_status: setStatusTo });
   }
 }
