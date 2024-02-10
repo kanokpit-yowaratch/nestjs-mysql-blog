@@ -17,7 +17,7 @@ export class BlogsService {
   }
 
   findAll(): Promise<Blog[]> {
-    return this.blogsRepository.find();
+    return this.blogsRepository.find({ where: { active_status: 1 } });
   }
 
   findOne(id: number): Promise<Blog | null> {

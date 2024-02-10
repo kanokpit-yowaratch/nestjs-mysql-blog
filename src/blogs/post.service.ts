@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Blog } from './entities/blog.entity';
 import { Brackets, Repository } from 'typeorm';
-import { Pagination, PostWithPagination } from './page.interface';
+import { PageCondition, PostWithPagination } from './page.interface';
 
 @Injectable()
 export class PostService {
@@ -11,12 +11,12 @@ export class PostService {
     private blogsRepository: Repository<Blog>,
   ) { }
 
-  async findAllActive(page: Pagination, keyword: string): Promise<PostWithPagination> {
+  async findAllActive(page: PageCondition, keyword: string): Promise<PostWithPagination> {
     const take = page.limit || 10
     const skip = page.offset || 0
 
     const result = this.blogsRepository.createQueryBuilder('blog')
-      .where("blog.active_status = :active_status", { active_status: 0 });
+      .where("blog.active_status = :active_status", { active_status: 1 });
 
     if (keyword) {
       result
@@ -28,14 +28,17 @@ export class PostService {
         );
     }
 
-    const tempResult = await result.take(take).skip(skip).getMany();
+    const totalData = (await result.getMany()).length;
+    const pageData = await result.take(take).skip(skip).getMany();
+    const totalPage = Math.ceil(totalData / page.limit);
 
     return {
-      data: tempResult,
-      count: tempResult.length,
+      data: pageData,
+      count: totalData,
       page: (page.page + 1),
       limit: page.limit,
-      offset: page.offset
+      offset: page.offset,
+      totalPage: totalPage
     }
   }
 

@@ -4,24 +4,20 @@ import {
   Get,
   Param,
   Query,
-  Body,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Blog } from './entities/blog.entity';
-import { Request } from 'express';
-import { PostWithPagination } from './page.interface';
+import { PageCondition, PostWithPagination } from './page.interface';
 
 @ApiTags('Blog')
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) { }
 
-  @Get('pg')
-  async getPostsWithPagination(@Body() formData: Request): Promise<PostWithPagination> {
-    const page = parseInt(formData['page'] as string) - 1;
-    const limit = parseInt(formData['rowsPerPage'] as string);
-    const keyword = formData['keyword'] || '';
+  createPageCondition(query: any): PageCondition {
+    const page = query.page ? parseInt(query.page as string) - 1 : 0;
+    const limit = query.rowsPerPage ? parseInt(query.rowsPerPage as string) : 5;
 
     if (isNaN(page) || page < 0) {
       throw new BadRequestException('Invalid current page.');
@@ -34,8 +30,13 @@ export class PostController {
     }
 
     const offset = page * limit;
-    const conditionPaging = { page, limit, offset };
+    return { page, limit, offset }
+  }
 
+  @Get()
+  async page(@Query() query: any): Promise<PostWithPagination> {
+    const conditionPaging = this.createPageCondition(query);
+    const keyword = query.keyword || '';
     return await this.postService.findAllActive(conditionPaging, keyword);
   }
 
@@ -43,11 +44,5 @@ export class PostController {
   @Get(':slug')
   postDetail(@Param('slug') slug: string): Promise<Blog> {
     return this.postService.detail(slug);
-  }
-
-  // post/?keyword=something
-  @Get()
-  searchPost(@Query('keyword') keyword: string): Promise<Blog[] | []> {
-    return this.postService.search(keyword);
   }
 }
