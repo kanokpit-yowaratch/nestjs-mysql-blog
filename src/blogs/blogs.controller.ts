@@ -8,6 +8,7 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  Query,
 } from '@nestjs/common';
 import { BlogsService } from './blogs.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
@@ -39,8 +40,8 @@ export class BlogsController {
   }
 
   @Get()
-  findAll() {
-    return this.blogsService.findAll();
+  findAll(@Query() query: any) {
+    return this.blogsService.findAll(query);
   }
 
   @Get(':id')
@@ -72,5 +73,10 @@ export class BlogsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.blogsService.remove(+id);
+  }
+
+  @Get('status')
+  setStatus(@Param('id') id: string) {
+    return this.blogsService.status(+id);
   }
 }
