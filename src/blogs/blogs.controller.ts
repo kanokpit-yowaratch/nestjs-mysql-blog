@@ -75,7 +75,7 @@ export class BlogsController {
     return this.blogsService.remove(+id);
   }
 
-  @Get('status')
+  @Get('status/:id')
   setStatus(@Param('id') id: string) {
     return this.blogsService.status(+id);
   }
